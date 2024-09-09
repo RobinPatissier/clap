@@ -1,0 +1,11 @@
+{# templates/password_reset/request.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Forgot Password{% endblock %}
+
+{% block body %}
+    <h1>Forgot Your Password?</h1>
+    {{ form_start(requestForm) }}
+        {{ form_widget(requestForm) }}
+    {{ form_end(requestForm) }}
+{% endblock %}

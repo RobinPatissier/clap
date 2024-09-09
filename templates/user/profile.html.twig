@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>{{ user.email }}</h1>
+
+    {% if app.user != user %}
+        {% if app.user.following.contains(user) %}
+            <a href="{{ path('user_unfollow', {id: user.id}) }}" class="btn btn-danger">Unfollow</a>
+        {% else %}
+            <a href="{{ path('user_follow', {id: user.id}) }}" class="btn btn-primary">Follow</a>
+        {% endif %}
+    {% endif %}
+    
+    <h2>Followers: {{ user.followers|length }}</h2>
+    <h2>Following: {{ user.following|length }}</h2>
+{% endblock %}

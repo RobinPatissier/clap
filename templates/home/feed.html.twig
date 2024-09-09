@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>My Feed</h1>
+
+    {% if pops is empty %}
+        <p>You are not following anyone or there are no Pops to display.</p>
+    {% else %}
+        <ul>
+            {% for pop in pops %}
+                <li>
+                    <strong>{{ pop.author.email }}</strong> - {{ pop.createdAt|date('Y-m-d H:i') }}<br>
+                    {{ pop.content }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

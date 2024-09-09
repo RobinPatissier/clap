@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>{{ group.name }}</h1>
+
+    <h2>Pops</h2>
+
+    <ul>
+        {% for pop in pops %}
+            <li>{{ pop.content }} - Posted by {{ pop.author.email }} on {{ pop.createdAt|date('Y-m-d H:i') }}</li>
+        {% else %}
+            <li>No pops yet in this group.</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ path('new_pop', {id: group.id}) }}" class="btn btn-primary">Post a New Pop</a>
+{% endblock %}
