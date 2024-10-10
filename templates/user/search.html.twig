@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rechercher des utilisateurs{% endblock %}
+
+{% block body %}
+    <h1>Rechercher des utilisateurs</h1>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button type="submit" class="btn btn-primary">Rechercher</button>
+    {{ form_end(form) }}
+
+    {% if users is not empty %}
+        <h2>Résultats de la recherche</h2>
+        <ul>
+        {% for user in users %}
+            <li>
+                {{ user.pseudo }}
+                {% if app.user.isFollowing(user) %}
+                    <a href="{{ path('user_unfollow', {'id': user.id}) }}" class="btn btn-danger btn-sm">Ne plus suivre</a>
+                {% else %}
+                    <a href="{{ path('user_follow', {'id': user.id}) }}" class="btn btn-primary btn-sm">Suivre</a>
+                {% endif %}
+            </li>
+        {% endfor %}
+        </ul>
+    {% elseif form.vars.submitted %}
+        <p>Aucun utilisateur trouvé.</p>
+    {% endif %}
+{% endblock %}

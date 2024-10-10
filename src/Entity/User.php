@@ -45,6 +45,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Pop::class, mappedBy: 'author')]
     private Collection $pops;
 
+ /**
+     * @var Collection<int, Group>
+     */
+    #[ORM\ManyToMany(targetEntity: Group::class, mappedBy: 'users')]
+    private Collection $groups;
+
     /**
      * @var Collection<int, User>
      */
@@ -65,6 +71,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->pops = new ArrayCollection();
         $this->following = new ArrayCollection();
         $this->followers = new ArrayCollection();
+        $this->groups = new ArrayCollection();
     }
 
     // Getters et setters...
@@ -166,6 +173,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return null; // Utilisation de "bcrypt" ou "argon2i" n'exige pas de sel.
     }
 
+ /**
+     * @return Collection<int, Group>
+     */
+    public function getGroups(): Collection
+    {
+        return $this->groups;
+    }
+
+    public function addGroup(Group $group): static
+    {
+        if (!$this->groups->contains($group)) {
+            $this->groups->add($group);
+            $group->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGroup(Group $group): static
+    {
+        if ($this->groups->removeElement($group)) {
+            $group->removeUser($this);
+        }
+
+        return $this;
+    }
+    
     /**
      * @return Collection<int, Pop>
      */
@@ -221,4 +255,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         return $this->followers;
     }
+
+    public function isFollowing(User $user): bool
+{
+    return $this->following->contains($user);
+}
 }

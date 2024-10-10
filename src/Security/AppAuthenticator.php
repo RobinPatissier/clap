@@ -13,7 +13,6 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Badge\RememberMeBadge
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
-use Symfony\Component\Security\Http\SecurityRequestAttributes;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
 class AppAuthenticator extends AbstractLoginFormAuthenticator
@@ -22,18 +21,20 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
 
     public const LOGIN_ROUTE = 'app_login';
 
-    public function __construct(private UrlGeneratorInterface $urlGenerator)
+    private UrlGeneratorInterface $urlGenerator;
+
+    public function __construct(UrlGeneratorInterface $urlGenerator)
     {
+        $this->urlGenerator = $urlGenerator;
     }
 
     public function authenticate(Request $request): Passport
     {
-        $email = $request->request->get('email', '');
-    
-        $request->getSession()->set(SecurityRequestAttributes::LAST_USERNAME, $email);
-    
+        // On récupère le pseudo au lieu de l'email pour l'authentification
+        $pseudo = $request->request->get('pseudo', '');
+
         return new Passport(
-            new UserBadge($email),
+            new UserBadge($pseudo),
             new PasswordCredentials($request->request->get('password', '')),
             [
                 new CsrfTokenBadge('authenticate', $request->request->get('_csrf_token')),
@@ -41,19 +42,16 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
             ]
         );
     }
-    
+
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
-{
-    if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
-        return new RedirectResponse($targetPath);
+    {
+        // Rediriger l'utilisateur vers la dernière page demandée ou, par défaut, vers "home"
+        if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
+            return new RedirectResponse($targetPath);
+        }
+
+        return new RedirectResponse($this->urlGenerator->generate('home'));
     }
-
-    return new RedirectResponse($this->urlGenerator->generate('home')); 
-}
-
-
-
-    
 
     protected function getLoginUrl(Request $request): string
     {

@@ -1,15 +1,31 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Mon Feed{% endblock %}
+
 {% block body %}
-    <h1>My Feed</h1>
+    <h1>Mon Feed</h1>
+
+    <div class="pop-form">
+        <h2>Créer un nouveau Pop</h2>
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button type="submit" class="btn btn-primary">Publier</button>
+        {{ form_end(form) }}
+    </div>
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
 
     {% if pops is empty %}
-        <p>You are not following anyone or there are no Pops to display.</p>
+        <p>Vous ne suivez personne ou il n'y a pas de Pops à afficher.</p>
     {% else %}
-        <ul>
+        <ul class="pop-list">
             {% for pop in pops %}
-                <li>
-                    <strong>{{ pop.author.email }}</strong> - {{ pop.createdAt|date('Y-m-d H:i') }}<br>
+                <li class="pop-item">
+                    <strong>{{ pop.author.pseudo }}</strong> - {{ pop.createdAt|date('d/m/Y H:i') }}<br>
                     {{ pop.content }}
                 </li>
             {% endfor %}

@@ -19,13 +19,18 @@ class Pop
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
-    #[ORM\ManyToOne(inversedBy: 'userpops')]
+    #[ORM\ManyToOne(inversedBy: 'pops')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $author = null;
 
     #[ORM\ManyToOne(inversedBy: 'pops')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Group $relatedGroup = null;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {

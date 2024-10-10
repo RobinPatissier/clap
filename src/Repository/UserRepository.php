@@ -40,4 +40,15 @@ class UserRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function findByPseudoLike(string $pseudo, User $currentUser): array
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.pseudo LIKE :pseudo')
+            ->andWhere('u != :currentUser')
+            ->setParameter('pseudo', '%' . $pseudo . '%')
+            ->setParameter('currentUser', $currentUser)
+            ->getQuery()
+            ->getResult();
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Group;
+use App\Entity\User;
 use App\Form\GroupType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,6 +18,14 @@ class GroupController extends AbstractController
     #[IsGranted('ROLE_USER')]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+        // Récupérer l'utilisateur connecté
+        $user = $this->getUser();
+
+        // Vérification explicite que l'utilisateur est authentifié
+        if (!$user instanceof User) {
+            return $this->redirectToRoute('app_login');
+        }
+
         $group = new Group();
         $form = $this->createForm(GroupType::class, $group);
 
@@ -24,7 +33,7 @@ class GroupController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             // Ajouter l'utilisateur créateur comme membre du groupe
-            $group->addUser($this->getUser());
+            $group->addUser($user);
             $group->setCreatedAt(new \DateTimeImmutable());
 
             // Sauvegarder le groupe
@@ -45,8 +54,15 @@ class GroupController extends AbstractController
     #[IsGranted('ROLE_USER')]
     public function delete(Group $group, EntityManagerInterface $entityManager): Response
     {
+        $user = $this->getUser();
+
+        // Vérification explicite que l'utilisateur est authentifié
+        if (!$user instanceof User) {
+            return $this->redirectToRoute('app_login');
+        }
+
         // Vérifier si l'utilisateur est membre du groupe
-        if (!$group->getUsers()->contains($this->getUser())) {
+        if (!$group->getUsers()->contains($user)) {
             $this->addFlash('error', 'You cannot delete a group you do not belong to.');
             return $this->redirectToRoute('group_list');
         }
@@ -60,12 +76,17 @@ class GroupController extends AbstractController
         return $this->redirectToRoute('group_list');
     }
 
-    // Méthode pour lister les groupes auxquels appartient l'utilisateur
     #[Route('/groups', name: 'group_list')]
     #[IsGranted('ROLE_USER')]
     public function list(): Response
     {
         $user = $this->getUser();
+
+        // Vérification explicite que l'utilisateur est authentifié
+        if (!$user instanceof User) {
+            return $this->redirectToRoute('app_login');
+        }
+
         $groups = $user->getGroups();
 
         return $this->render('group/list.html.twig', [
@@ -73,11 +94,17 @@ class GroupController extends AbstractController
         ]);
     }
 
-    // Méthode pour afficher les détails d'un groupe et ses pops
     #[Route('/group/{id}', name: 'group_show')]
     #[IsGranted('ROLE_USER')]
     public function show(Group $group): Response
     {
+        $user = $this->getUser();
+
+        // Vérification explicite que l'utilisateur est authentifié
+        if (!$user instanceof User) {
+            return $this->redirectToRoute('app_login');
+        }
+
         // Récupérer les pops associés au groupe
         $pops = $group->getPops();
 

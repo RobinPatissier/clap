@@ -1,9 +1,9 @@
-{# templates/home/index.html.twig #}
-{% extends 'base.html.twig' %}
+<h1>Welcome, {{ app.user.pseudo }}!</h1>
 
-{% block title %}Accueil{% endblock %}
-
-{% block body %}
-    <h1>Bienvenue sur la page d'accueil</h1>
-    <p>Ceci est la page d'accueil après la connexion.</p>
-{% endblock %}
+<ul>
+    {% for pop in pops %}
+        <li>{{ pop.content }} - posted by {{ pop.author.pseudo }}</li>
+    {% else %}
+        <li>No pops found for the users you follow.</li>
+    {% endfor %}
+</ul>
