@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Profil{% endblock %}
+
+{% block body %}
+    <h1>Mon Profil</h1>
+    
+    <h2>Mes informations</h2>
+    <p>Pseudo : {{ user.pseudo }}</p>
+    <p>Email : {{ user.email }}</p>
+    
+    <h2>Mes Pops</h2>
+    {% if pops is empty %}
+        <p>Vous n'avez pas encore publié de Pop.</p>
+    {% else %}
+        <ul>
+        {% for pop in pops %}
+            <li>{{ pop.content }} - {{ pop.createdAt|date('d/m/Y H:i') }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    
+    <h2>Personnes que je suis</h2>
+    {% if following is empty %}
+        <p>Vous ne suivez personne pour le moment.</p>
+    {% else %}
+        <ul>
+        {% for followedUser in following %}
+            <li>{{ followedUser.pseudo }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    
+    <h2>Mes groupes</h2>
+    {% if groups is empty %}
+        <p>Vous n'êtes membre d'aucun groupe.</p>
+    {% else %}
+        <ul>
+        {% for group in groups %}
+            <li>{{ group.name }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}
