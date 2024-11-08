@@ -1,0 +1,112 @@
+body {
+    background-color: #221F1F;
+    color: #FFFFFF;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+/* Page Feed */
+
+.container-fluid {
+    height: 100vh;
+}
+
+.sidebar, main, aside {
+    background-color: #221F1F;
+    color: #FFFFFF;
+    padding: 20px;
+    height: 100%;
+}
+
+.sidebar {
+    border-right: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+main {
+    border-right: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.nav-link {
+    color: #FFFFFF;
+}
+
+.nav-link.active {
+    font-weight: bold;
+}
+
+.btn-primary {
+    background-color: #D42029;
+    border-color: #D42029;
+}
+
+.btn-primary:hover {
+    background-color: #B71C24;
+    border-color: #B71C24;
+}
+
+.logo {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo img {
+    max-width: 50%;
+    height: auto;
+}
+
+.feed {
+    padding: 20px; /* Espace autour du feed */
+}
+
+.post {
+    background-color: #2C2C2C; /* Couleur de fond pour les blocs */
+    border-radius: 8px; /* Coins arrondis */
+    padding: 15px; /* Espace à l'intérieur du bloc */
+    margin-bottom: 15px; /* Espace entre les blocs */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre pour un effet de profondeur */
+    color: #FFFFFF; /* Couleur du texte */
+}
+
+
+
+/* Page Profile */
+
+.profile-container {
+    max-width: 800px; /* Largeur maximale pour le profil */
+    margin: 0 auto; /* Centrer le contenu */
+    padding: 20px; /* Espace autour du contenu */
+    background-color: #2C2C2C; /* Couleur de fond pour le profil */
+    border-radius: 8px; /* Coins arrondis */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Ombre pour un effet de profondeur */
+}
+
+.section {
+    margin-bottom: 20px; /* Espace entre les sections */
+    padding: 15px; /* Espace à l'intérieur de chaque section */
+    background-color: #3A3A3A; /* Couleur de fond pour les sections */
+    border-radius: 8px; /* Coins arrondis */
+}
+
+h2 {
+    margin-top: 0; /* Supprimer la marge supérieure pour les titres */
+}
+
+.pop-list, .following-list, .group-list {
+    list-style-type: none; /* Supprimer les puces des listes */
+    padding: 0; /* Supprimer le padding par défaut */
+}
+
+.pop-item, .following-item, .group-item {
+    padding: 10px; /* Espace à l'intérieur des éléments de liste */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Ligne de séparation */
+}
+
+.pop-item:last-child, .following-item:last-child, .group-item:last-child {
+    border-bottom: none; /* Supprimer la ligne de séparation pour le dernier élément */
+}
+
+.pop-date {
+    color: #B0B0B0; /* Couleur pour la date */
+    font-size: 0.9em; /* Taille de police plus petite pour la date */
+}

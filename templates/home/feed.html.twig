@@ -22,13 +22,13 @@
     {% if pops is empty %}
         <p>Vous ne suivez personne ou il n'y a pas de Pops à afficher.</p>
     {% else %}
-        <ul class="pop-list">
+        <div class="feed">
             {% for pop in pops %}
-                <li class="pop-item">
+                <div class="post">
                     <strong>{{ pop.author.pseudo }}</strong> - {{ pop.createdAt|date('d/m/Y H:i') }}<br>
                     {{ pop.content }}
-                </li>
+                </div>
             {% endfor %}
-        </ul>
+        </div>
     {% endif %}
 {% endblock %}
