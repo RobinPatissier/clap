@@ -85,11 +85,11 @@ class UserController extends AbstractController
     private function searchMovies(string $query): array
     {
         $client = new Client();
-        $apiKey = $this->getParameter('OMDB_API_KEY'); // Récupérer la clé API depuis les paramètres
-        $url = 'http://www.omdbapi.com/?apikey=' . $apiKey . '&s=' . urlencode($query);
-
-        $response = $client->request('GET', $url);
+        // $apiKey = $this->getParameter('OMDB_API_KEY'); // Récupérer la clé API depuis les paramètres
+        $url = 'http://www.omdbapi.com/?apikey=fd35f46b' . '&s=' . urlencode($query);
+        $response = $client->request('POST', $url);
         $data = json_decode($response->getBody(), true);
+       
 
         return $data['Search'] ?? []; // Retourne les résultats de recherche
     }
