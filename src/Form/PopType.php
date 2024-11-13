@@ -4,7 +4,8 @@ namespace App\Form;
 
 use App\Entity\Pop;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,8 +14,18 @@ class PopType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('content', TextareaType::class, [
-                'label' => 'Your Pop',
+            ->add('content', TextType::class, [
+                'label' => 'Contenu',
+                'attr' => ['class' => 'form-control'],
+            ])
+            ->add('media', FileType::class, [
+                'label' => 'Ajouter une image',
+                'required' => false,
+                'attr' => ['class' => 'form-control'],
+            ])
+            ->add('youtubeLink', TextType::class, [
+                'label' => 'Lien YouTube',
+                'required' => false,
                 'attr' => ['class' => 'form-control'],
             ]);
     }

@@ -27,6 +27,12 @@ class Pop
     #[ORM\JoinColumn(nullable: true)]
     private ?Group $relatedGroup = null;
 
+    #[ORM\Column(type: "string", nullable: true)]
+    private $media;
+
+    #[ORM\Column(type: "string", nullable: true)]
+    private $youtubeLink;
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
@@ -82,6 +88,30 @@ class Pop
     public function setRelatedGroup(?Group $relatedGroup): static
     {
         $this->relatedGroup = $relatedGroup;
+
+        return $this;
+    }
+
+    public function getMedia(): ?string
+    {
+        return $this->media;
+    }
+
+    public function setMedia(?string $media): self
+    {
+        $this->media = $media;
+
+        return $this;
+    }
+
+    public function getYoutubeLink(): ?string
+    {
+        return $this->youtubeLink;
+    }
+
+    public function setYoutubeLink(?string $youtubeLink): self
+    {
+        $this->youtubeLink = $youtubeLink;
 
         return $this;
     }

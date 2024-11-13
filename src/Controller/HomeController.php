@@ -38,6 +38,22 @@ class HomeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $newPop->setAuthor($user);
             $newPop->setRelatedGroup(null);  // Ajoutez cette ligne
+
+            // Gestion du fichier média
+            $mediaFile = $form->get('media')->getData();
+            if ($mediaFile) {
+                // Logique pour enregistrer le fichier
+                $fileName = uniqid().'.'.$mediaFile->guessExtension();
+                $mediaFile->move($this->getParameter('media_directory'), $fileName);
+                $newPop->setMedia($fileName);
+            }
+
+            // Gestion du lien YouTube
+            $youtubeLink = $form->get('youtubeLink')->getData();
+            if ($youtubeLink) {
+                $newPop->setYoutubeLink($youtubeLink);
+            }
+
             $entityManager->persist($newPop);
             $entityManager->flush();
 

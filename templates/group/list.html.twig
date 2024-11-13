@@ -1,17 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Your Groups</h1>
+    <h1>Vos Groupes</h1>
 
-    <a href="{{ path('new_group') }}" class="btn btn-primary mb-3">Create New Group</a>
+    <a href="{{ path('new_group') }}" class="btn btn-primary mb-3 rounded-pill">Créer un nouveau groupe</a>
 
     <ul>
         {% for group in groups %}
             <li>{{ group.name }} 
-                <a href="{{ path('delete_group', {id: group.id}) }}" class="btn btn-danger btn-sm">Delete</a>
+                <a href="{{ path('delete_group', {id: group.id}) }}" class="btn btn-danger rounded-pill btn-sm">Supprimer</a>
             </li>
         {% else %}
-            <li>You are not part of any group.</li>
+            <li>Vous ne faites partie d'aucun groupe.</li>
         {% endfor %}
     </ul>
 {% endblock %}

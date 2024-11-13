@@ -7,11 +7,11 @@
 
     <ul>
         {% for pop in pops %}
-            <li>{{ pop.content }} - Posted by {{ pop.author.email }} on {{ pop.createdAt|date('Y-m-d H:i') }}</li>
+            <li>{{ pop.content }} - Posté par {{ pop.author.email }} le {{ pop.createdAt|date('Y-m-d H:i') }}</li>
         {% else %}
-            <li>No pops yet in this group.</li>
+            <li>Aucun Pop dans ce groupe</li>
         {% endfor %}
     </ul>
 
-    <a href="{{ path('new_pop', {id: group.id}) }}" class="btn btn-primary">Post a New Pop</a>
+    <a href="{{ path('new_pop', {id: group.id}) }}" class="btn btn-primary">POP !</a>
 {% endblock %}

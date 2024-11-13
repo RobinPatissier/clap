@@ -5,11 +5,14 @@
 {% block body %}
     <h1>Mon Feed</h1>
 
-    <div class="pop-form">
+    <div class="pop-form mt-5">
         <h2>Créer un nouveau Pop</h2>
         {{ form_start(form) }}
         {{ form_widget(form.content) }}
-        <button type="submit" class="btn btn-primary">Publier</button>
+        {{ form_widget(form.media) }}
+        {{ form_widget(form.youtubeLink) }}
+        <button type="submit" class="btn btn-danger mt-3 d-flex flex-row rounded-pill">Publier</button>
+
         {{ form_end(form) }}
     </div>
 
@@ -24,10 +27,25 @@
     {% else %}
         <div class="feed">
             {% for pop in pops %}
-                <div class="post">
-                    <strong>{{ pop.author.pseudo }}</strong> - {{ pop.createdAt|date('d/m/Y H:i') }}<br>
-                    {{ pop.content }}
+                <div class="post p-3 mb-3" style="background-color: transparent;">
+                    <strong style="font-size: 1.25rem;">{{ pop.author.pseudo }}</strong>
+                    - <span style="color: #888;">{{ pop.createdAt|date('d/m/Y H:i') }}</span>
+                    <br>
+                    <span style="font-size: 1rem;">{{ pop.content }}</span>
+
+                    {% if pop.media %}
+                        <div class="media">
+                            <img src="{{ asset('uploads/media/' ~ pop.media) }}" alt="Media" style="max-width: 100%; height: auto;">
+                        </div>
+                    {% endif %}
+
+                    {% if pop.youtubeLink %}
+                        <div class="youtube-video">
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ pop.youtubeLink|split('v=')[1] }}" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    {% endif %}
                 </div>
+                <hr class="my-3" style="border: 1px solid #ccc;">
             {% endfor %}
         </div>
     {% endif %}
