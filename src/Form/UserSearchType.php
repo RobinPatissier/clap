@@ -15,6 +15,10 @@ class UserSearchType extends AbstractType
             ->add('pseudo', SearchType::class, [
                 'label' => 'Rechercher un utilisateur',
                 'required' => false,
+            ])
+            ->add('movie', SearchType::class, [
+                'label' => 'Rechercher un film',
+                'required' => false,
             ]);
     }
 

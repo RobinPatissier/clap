@@ -1,16 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>{{ user.email }}</h1>
-
-    {% if app.user != user %}
-        {% if app.user.following.contains(user) %}
-            <a href="{{ path('user_unfollow', {id: user.id}) }}" class="btn btn-danger">Unfollow</a>
-        {% else %}
-            <a href="{{ path('user_follow', {id: user.id}) }}" class="btn btn-primary">Follow</a>
-        {% endif %}
+    <h1>{{ user.pseudo }}</h1>
+    {% if user.profilePicture %}
+        <img src="{{ asset('uploads/profile_pictures/' ~ user.profilePicture) }}" alt="Photo de profil" />
+    {% else %}
+        <p>Aucune photo de profil disponible.</p>
     {% endif %}
-    
-    <h2>Followers: {{ user.followers|length }}</h2>
-    <h2>Following: {{ user.following|length }}</h2>
+    <a href="{{ path('user_profile_edit') }}">Modifier le profil</a>
 {% endblock %}

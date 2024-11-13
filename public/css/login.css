@@ -1,0 +1,100 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Bruno+Ace&display=swap');
+
+
+body {
+    background-color: #221F1F; /* Couleur de fond de la page */
+    color: #FFFFFF; /* Couleur du texte */
+    font-family: "Bruno Ace", sans-serif; /* Police de caractères */
+    margin: 0; /* Supprimer les marges par défaut */
+    padding: 0; /* Supprimer le padding par défaut */
+    font-family: "Bruno Ace", serif;
+}
+
+.bruno {
+    font-family: "Bruno Ace", serif;
+}
+
+.container {
+    min-height: 100vh; /* Hauteur minimale pour centrer verticalement */
+    display: flex; /* Utiliser flexbox pour centrer le contenu */
+    justify-content: center; /* Centrer horizontalement */
+    align-items: center; /* Centrer verticalement */
+}
+
+.card {
+    background-color: #2C2C2C; /* Couleur de fond de la carte */
+    border-radius: 10px; /* Coins arrondis */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Ombre pour un effet de profondeur */
+    width: 100%; /* Prendre toute la largeur disponible */
+    max-width: 400px; /* Largeur maximale de la carte */
+    padding: 20px; /* Espacement interne */
+    transition: transform 0.2s; /* Animation pour l'effet de survol */
+}
+
+.card:hover {
+    transform: scale(1.05); /* Agrandir légèrement la carte au survol */
+}
+
+.card-title {
+    color: #D42029; /* Couleur du titre de la carte */
+    margin-bottom: 20px; /* Marge inférieure pour espacer le titre */
+    text-align: center; /* Centrer le titre */
+}
+
+.form-group {
+    margin-bottom: 15px; /* Espace entre les groupes de formulaire */
+    text-align: start; /* Alignement du texte à gauche */
+}
+
+.form-control {
+    background-color: #3A3A3A; /* Couleur de fond des champs de formulaire */
+    border: 1px solid #D42029; /* Bordure des champs de formulaire */
+    color: #FFFFFF; /* Couleur du texte dans les champs */
+    border-radius: 5px; /* Coins arrondis pour les champs */
+    padding: 10px; /* Espacement interne pour les champs */
+    width: 100%; /* S'assurer que les champs prennent toute la largeur */
+    box-sizing: border-box; /* Inclure le padding et la bordure dans la largeur totale */
+}
+
+.form-control:focus {
+    background-color: #3A3A3A; /* Couleur de fond lors du focus */
+    border-color: #B71C24; /* Couleur de bordure lors du focus */
+    box-shadow: 0 0 5px rgba(211, 32, 41, 0.5); /* Ombre lors du focus */
+}
+
+.btn-primary {
+    background-color: #D42029; /* Couleur de fond du bouton */
+    border-color: #D42029; /* Couleur de bordure du bouton */
+    border-radius: 5px; /* Coins arrondis pour le bouton */
+    padding: 10px; /* Espacement interne pour le bouton */
+    font-size: 16px; /* Taille de police pour le bouton */
+    width: 100%; /* Prendre toute la largeur disponible */
+}
+
+.btn-primary:hover {
+    background-color: #B71C24; /* Couleur de fond au survol */
+    border-color: #B71C24; /* Couleur de bordure au survol */
+}
+
+.text-center {
+    text-align: center; /* Centrer le texte */
+}
+
+.alert {
+    margin-bottom: 20px; /* Espace en bas des alertes */
+    background-color: #D42029; /* Couleur de fond de l'alerte */
+    color: #FFFFFF; /* Couleur du texte de l'alerte */
+    border-radius: 5px; /* Coins arrondis pour l'alerte */
+    padding: 10px; /* Espacement interne pour l'alerte */
+}
+
+/* Nouvelle règle pour le lien d'inscription */
+.text-center a {
+    color: #D42029; /* Couleur rouge pour le lien */
+    text-decoration: none; /* Supprimer le soulignement */
+}
+
+.text-center a:hover {
+    text-decoration: underline; /* Souligner le lien au survol */
+}

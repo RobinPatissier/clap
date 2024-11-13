@@ -64,6 +64,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: self::class, mappedBy: 'following')]
     private Collection $followers;
 
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $profilePicture;
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable(); 

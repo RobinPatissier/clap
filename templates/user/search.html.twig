@@ -1,17 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Rechercher des utilisateurs{% endblock %}
+{% block title %}Rechercher des utilisateurs et des films{% endblock %}
 
 {% block body %}
-    <h1>Rechercher des utilisateurs</h1>
+    <h1>Rechercher des utilisateurs et des films</h1>
 
     {{ form_start(form) }}
-    {{ form_widget(form) }}
+    {{ form_widget(form.pseudo) }}
+    {{ form_widget(form.movie) }}
     <button type="submit" class="btn btn-primary">Rechercher</button>
     {{ form_end(form) }}
 
     {% if users is not empty %}
-        <h2>Résultats de la recherche</h2>
+        <h2>Résultats de la recherche d'utilisateurs</h2>
         <ul>
         {% for user in users %}
             <li>
@@ -26,5 +27,18 @@
         </ul>
     {% elseif form.vars.submitted %}
         <p>Aucun utilisateur trouvé.</p>
+    {% endif %}
+
+    {% if movies is not empty %}
+        <h2>Résultats de la recherche de films</h2>
+        <ul>
+        {% for movie in movies %}
+            <li>
+                <strong>{{ movie.Title }}</strong> ({{ movie.Year }}) - {{ movie.Plot }}
+            </li>
+        {% endfor %}
+        </ul>
+    {% elseif form.vars.submitted %}
+        <p>Aucun film trouvé.</p>
     {% endif %}
 {% endblock %}

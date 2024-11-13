@@ -4,7 +4,10 @@
         <meta charset="UTF-8">
         <title>{% block title %}Clap!{% endblock %}</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+        <link rel="stylesheet" href="/css/styles.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bruno+Ace&display=swap" rel="stylesheet">
         {% block stylesheets %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </head>
@@ -18,28 +21,34 @@
                         </div>
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link active" href="{{ path('home') }}">
-                                    Accueil
+                                <a class="nav-link active p-4" href="{{ path('home') }}">
+                                    <img src="{{ asset('images/home.png') }}" alt="Accueil" class="img-fluid" style="width: 20px; height: 20px; margin-right: 5px;"> Accueil
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ path('group_list') }}">
-                                    Groupes
+                                <a class="nav-link p-4" href="{{ path('group_list') }}">
+                                    <img src="{{ asset('images/group.png') }}" alt="Groupes" class="img-fluid" style="width: 20px; height: 20px; margin-right: 5px;"> Groupes
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ path('app_profile') }}">
-                                    Profil
+                                <a class="nav-link p-4" href="{{ path('app_profile') }}">
+                                    <img src="{{ asset('images/pictoprofil.png') }}" alt="Profil" class="img-fluid" style="width: 20px; height: 20px; margin-right: 5px;"> Profil
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item">
+                                <a class="nav-link p-4" href="{{ path('user_search') }}">
+                                    <img src="{{ asset('images/pictosearch.png') }}" alt="Recherche" class="img-fluid" style="width: 20px; height: 20px; margin-right: 5px;"> Recherche
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ path('app_logout') }}">
-                                    Déconnexion
+                                <a class="nav-link p-4" href="{{ path('app_logout') }}">
+                                    <img src="{{ asset('images/cdlogo.png') }}" alt="Déconnexion" class="img-fluid" style="width: 20px; height: 20px; margin-right: 5px;"> Déconnexion
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ path('user_search') }}">
-                                    Recherche
+                                <li class="nav-item">
+                                <a class="nav-link p-4" href="{{ path('app_logout') }}">
+                                   <button class="btn btn-danger"> POP ! </button>
                                 </a>
                             </li>
                         </ul>

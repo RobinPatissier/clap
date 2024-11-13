@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use GuzzleHttp\Client;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class UserController extends AbstractController
 {
@@ -22,14 +24,24 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         $users = [];
+        $movies = [];
+        
         if ($form->isSubmitted() && $form->isValid()) {
-            $searchTerm = $form->get('pseudo')->getData();
-            $users = $userRepository->findByPseudoLike($searchTerm, $this->getUser());
+            $searchTermUser = $form->get('pseudo')->getData(); // Récupérer le terme de recherche pour les utilisateurs
+            if ($searchTermUser) {
+                $users = $userRepository->findByPseudoLike($searchTermUser, $this->getUser());
+            }
+
+            $searchTermMovie = $form->get('movie')->getData(); // Récupérer le terme de recherche pour les films
+            if ($searchTermMovie) {
+                $movies = $this->searchMovies($searchTermMovie);
+            }
         }
 
         return $this->render('user/search.html.twig', [
             'form' => $form->createView(),
             'users' => $users,
+            'movies' => $movies,
         ]);
     }
 
@@ -68,5 +80,17 @@ class UserController extends AbstractController
         return $this->render('user/profile.html.twig', [
             'user' => $user,
         ]);
+    }
+
+    private function searchMovies(string $query): array
+    {
+        $client = new Client();
+        $apiKey = $this->getParameter('OMDB_API_KEY'); // Récupérer la clé API depuis les paramètres
+        $url = 'http://www.omdbapi.com/?apikey=' . $apiKey . '&s=' . urlencode($query);
+
+        $response = $client->request('GET', $url);
+        $data = json_decode($response->getBody(), true);
+
+        return $data['Search'] ?? []; // Retourne les résultats de recherche
     }
 }
