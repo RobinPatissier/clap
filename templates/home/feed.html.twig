@@ -8,9 +8,21 @@
     <div class="pop-form mt-5">
         <h2>Créer un nouveau Pop</h2>
         {{ form_start(form) }}
-        {{ form_widget(form.content) }}
-        {{ form_widget(form.media) }}
-        {{ form_widget(form.youtubeLink) }}
+        
+        <div class="form-group">
+            {{ form_widget(form.content, {'attr': {'class': 'form-control', 'placeholder': 'Quoi de neuf ?'}}) }}
+        </div>
+
+        <div class="media-input mt-3">
+            <label for="media" class="form-label">Ajouter une image</label>
+            {{ form_widget(form.media, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="youtube-input mt-3">
+            <label for="youtubeLink" class="form-label">Lien YouTube</label>
+            {{ form_widget(form.youtubeLink, {'attr': {'class': 'form-control', 'placeholder': 'https://www.youtube.com/watch?v=...'}}) }}
+        </div>
+
         <button type="submit" class="btn btn-danger mt-3 d-flex flex-row rounded-pill">Publier</button>
 
         {{ form_end(form) }}
